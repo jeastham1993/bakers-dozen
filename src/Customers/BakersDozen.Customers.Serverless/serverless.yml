@@ -43,13 +43,13 @@ package:
   individually: true
 
 functions:
-  createRepo:
+  createCustomer:
     handler: CsharpHandlers::BakersDozen.Customers.Serverless.CustomerEndpoints.Create::Execute
     package:
       artifact: bin/Release/netcoreapp3.1/BakersDozen.Customers.zip
     events:
       - http:
-          path: repos
+          path: customers
           method: post
 
 resources:
