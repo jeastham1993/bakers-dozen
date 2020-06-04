@@ -15,7 +15,6 @@ namespace BakersDozen.Customers.Infrastructure
 	    public static IServiceCollection ConfigureServices(
 		    this IServiceCollection services)
 	    {
-
 		    return services;
 	    }
 
@@ -23,6 +22,7 @@ namespace BakersDozen.Customers.Infrastructure
 		    this IServiceCollection services)
 	    {
 		    var dynamoDbConfig = new AmazonDynamoDBConfig();
+
 		    services.AddSingleton<AmazonDynamoDBClient>(new AmazonDynamoDBClient(dynamoDbConfig));
 
 		    DynamoDbConstants.TableName = Environment.GetEnvironmentVariable("TABLE_NAME");

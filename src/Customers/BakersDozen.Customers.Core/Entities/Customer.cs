@@ -7,7 +7,7 @@ using BakersDozen.SharedKernel;
 
 namespace BakersDozen.Customers.Core.Entities
 {
-    public class Customer : Entity<Guid>
+    public class Customer : Entity
     {
 	    private List<Address> _addresses;
 
@@ -46,12 +46,50 @@ namespace BakersDozen.Customers.Core.Entities
 
 	        if (existingAddress.Any())
 	        {
-		        this._addresses.Remove(existingAddress.First());
+		        return null;
 	        }
+	        else
+	        {
+		        this._addresses.Add(newAddress);
 
-	        this._addresses.Add(newAddress);
+		        return newAddress;   
+	        }
+        }
 
-	        return newAddress;
+		public Address UpdateAddress(string name,
+			string addressLine1,
+			string town,
+			string postcode,
+			string countryCode)
+		{
+			var newAddress = new Address(
+				name,
+				addressLine1,
+				town,
+				postcode,
+				countryCode);
+
+			var existingAddress = this._addresses.Where(p => p.Name == newAddress.Name);
+
+			if (existingAddress.Any())
+			{
+				this._addresses.Remove(existingAddress.First());
+			}
+
+			this._addresses.Add(newAddress);
+
+			return newAddress;
+		}
+
+        public void RemoveAddress(
+	        string name)
+        {
+	        var existingAddress = this._addresses.FirstOrDefault(p => p.Name == name);
+
+			if (existingAddress != null)
+			{
+				this._addresses.Remove(existingAddress);
+			}
         }
     }
 }

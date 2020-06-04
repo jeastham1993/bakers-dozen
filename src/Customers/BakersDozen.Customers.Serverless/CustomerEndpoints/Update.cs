@@ -19,11 +19,11 @@ using Newtonsoft.Json;
 
 namespace BakersDozen.Customers.Serverless.CustomerEndpoints
 {
-    public class Create
+    public class Update
     {
 	    private readonly ICustomerRepository _customerRepository;
 
-	    public Create()
+	    public Update()
 	    {
 		    var serviceCollection = new ServiceCollection()
 			    .AddLogging()
@@ -38,26 +38,11 @@ namespace BakersDozen.Customers.Serverless.CustomerEndpoints
 		    APIGatewayProxyRequest request,
 		    ILambdaContext context)
 	    {
-		    var customerDto = JsonConvert.DeserializeObject<CreateCustomerDTO>(request.Body);
+		    var customer = JsonConvert.DeserializeObject<Customer>(request.Body);
 
 		    try
 		    {
-				var customer = new Customer()
-				{
-					EmailAddress = customerDto.EmailAddress,
-					FirstName = customerDto.FirstName,
-					LastName = customerDto.LastName,
-					Username = customerDto.Username
-				};
-
-				customer.AddAddress(
-					customerDto.AddressName,
-					customerDto.AddressLine1,
-					customerDto.Town,
-					customerDto.Postcode,
-					customerDto.Country);
-
-				var created = await this._customerRepository.CreateAsync(customer).ConfigureAwait(false);
+			    var created = await this._customerRepository.UpdateAsync(customer).ConfigureAwait(false);
 
 			    if (created != null)
 			    {
@@ -76,12 +61,12 @@ namespace BakersDozen.Customers.Serverless.CustomerEndpoints
 				    };
 			    }
 		    }
-		    catch (CustomerExistsException)
+		    catch (CustomerNotFoundException)
 		    {
 			    return new APIGatewayProxyResponse
 			    {
 				    StatusCode = 400,
-				    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(null, "Customer already exists"))
+				    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(null, "Customer not found"))
 			    };
 		    }
 	    }

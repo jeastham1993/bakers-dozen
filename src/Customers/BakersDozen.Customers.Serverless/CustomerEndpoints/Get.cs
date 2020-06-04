@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
@@ -19,11 +19,11 @@ using Newtonsoft.Json;
 
 namespace BakersDozen.Customers.Serverless.CustomerEndpoints
 {
-    public class Create
+    public class Get
     {
 	    private readonly ICustomerRepository _customerRepository;
 
-	    public Create()
+	    public Get()
 	    {
 		    var serviceCollection = new ServiceCollection()
 			    .AddLogging()
@@ -38,50 +38,35 @@ namespace BakersDozen.Customers.Serverless.CustomerEndpoints
 		    APIGatewayProxyRequest request,
 		    ILambdaContext context)
 	    {
-		    var customerDto = JsonConvert.DeserializeObject<CreateCustomerDTO>(request.Body);
-
 		    try
 		    {
-				var customer = new Customer()
-				{
-					EmailAddress = customerDto.EmailAddress,
-					FirstName = customerDto.FirstName,
-					LastName = customerDto.LastName,
-					Username = customerDto.Username
-				};
+			    var foundCustomer = await this._customerRepository
+				                        .RetrieveAsync(HttpUtility.HtmlDecode(request.PathParameters["username"]))
+				                        .ConfigureAwait(false);
 
-				customer.AddAddress(
-					customerDto.AddressName,
-					customerDto.AddressLine1,
-					customerDto.Town,
-					customerDto.Postcode,
-					customerDto.Country);
-
-				var created = await this._customerRepository.CreateAsync(customer).ConfigureAwait(false);
-
-			    if (created != null)
+			    if (foundCustomer != null)
 			    {
 				    return new APIGatewayProxyResponse
 				    {
 					    StatusCode = 200,
-					    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(created))
+					    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(foundCustomer))
 				    };
 			    }
 			    else
 			    {
 				    return new APIGatewayProxyResponse
 				    {
-					    StatusCode = 400,
-					    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(null, "Unhandled failure"))
+					    StatusCode = 404,
+					    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(null, "Customer not found"))
 				    };
 			    }
 		    }
-		    catch (CustomerExistsException)
+		    catch (CustomerNotFoundException)
 		    {
 			    return new APIGatewayProxyResponse
 			    {
 				    StatusCode = 400,
-				    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(null, "Customer already exists"))
+				    Body = JsonConvert.SerializeObject(new ApiResponse<Customer>(null, "Customer not found"))
 			    };
 		    }
 	    }

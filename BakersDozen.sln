@@ -9,15 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "Customer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BakeService", "BakeService", "{648B099B-CC1C-40DD-9DB2-5F10F02267C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakersDozen.Customers.Core", "src\Customers\BakersDozen.Customers.Core\BakersDozen.Customers.Core.csproj", "{E6BFF61E-96A5-4B3B-98E2-372C53670B46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakersDozen.Customers.Core", "src\Customers\BakersDozen.Customers.Core\BakersDozen.Customers.Core.csproj", "{E6BFF61E-96A5-4B3B-98E2-372C53670B46}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakersDozen.SharedKernel", "src\BakersDozen.SharedKernel\BakersDozen.SharedKernel.csproj", "{40DC5DD5-94AA-4178-918B-0698276E29A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakersDozen.Customers.UnitTest", "src\Customers\BakersDozen.Customers.UnitTest\BakersDozen.Customers.UnitTest.csproj", "{0F86A4AD-396C-4E73-9437-EC57158DA815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakersDozen.Customers.UnitTest", "src\Customers\BakersDozen.Customers.UnitTest\BakersDozen.Customers.UnitTest.csproj", "{0F86A4AD-396C-4E73-9437-EC57158DA815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BakersDozen.Customers.Infrastructure", "src\Customers\BakersDozen.Customers.Infrastructure\BakersDozen.Customers.Infrastructure.csproj", "{D34ECED3-48A9-410E-A4A9-186F9A494887}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakersDozen.Customers.Infrastructure", "src\Customers\BakersDozen.Customers.Infrastructure\BakersDozen.Customers.Infrastructure.csproj", "{D34ECED3-48A9-410E-A4A9-186F9A494887}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakersDozen.Customers.Serverless ", "src\Customers\BakersDozen.Customers.Serverless\BakersDozen.Customers.Serverless .csproj", "{62C92481-8575-47A6-9EFF-07145FCB5E09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BakersDozen.Customers.LocalSetup", "src\Customers\BakersDozen.Customers.LocalSetup\BakersDozen.Customers.LocalSetup.csproj", "{347A34A1-CBB5-4401-B9EA-F1808E70C482}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{62C92481-8575-47A6-9EFF-07145FCB5E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62C92481-8575-47A6-9EFF-07145FCB5E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62C92481-8575-47A6-9EFF-07145FCB5E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{347A34A1-CBB5-4401-B9EA-F1808E70C482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{347A34A1-CBB5-4401-B9EA-F1808E70C482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{347A34A1-CBB5-4401-B9EA-F1808E70C482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{347A34A1-CBB5-4401-B9EA-F1808E70C482}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{0F86A4AD-396C-4E73-9437-EC57158DA815} = {5F83CE79-A107-408B-A51E-C9BDA974C936}
 		{D34ECED3-48A9-410E-A4A9-186F9A494887} = {5F83CE79-A107-408B-A51E-C9BDA974C936}
 		{62C92481-8575-47A6-9EFF-07145FCB5E09} = {5F83CE79-A107-408B-A51E-C9BDA974C936}
+		{347A34A1-CBB5-4401-B9EA-F1808E70C482} = {5F83CE79-A107-408B-A51E-C9BDA974C936}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4DBCBAFE-ABEB-45C9-B316-02A45776A4EF}

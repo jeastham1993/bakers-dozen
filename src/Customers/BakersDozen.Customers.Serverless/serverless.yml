@@ -51,6 +51,22 @@ functions:
       - http:
           path: customers
           method: post
+  getCustomer:
+    handler: CsharpHandlers::BakersDozen.Customers.Serverless.CustomerEndpoints.Get::Execute
+    package:
+      artifact: bin/Release/netcoreapp3.1/BakersDozen.Customers.zip
+    events:
+      - http:
+          path: customers/{username}
+          method: get
+  updateCustomer:
+    handler: CsharpHandlers::BakersDozen.Customers.Serverless.CustomerEndpoints.Update::Execute
+    package:
+      artifact: bin/Release/netcoreapp3.1/BakersDozen.Customers.zip
+    events:
+      - http:
+          path: customers/{username}
+          method: put
 
 resources:
   Resources:
